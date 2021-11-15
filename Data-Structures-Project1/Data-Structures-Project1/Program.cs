@@ -28,6 +28,7 @@ namespace Data_Structures_Project1
             return a;
         }
 
+
         public static void dolaşım(double[,] liste1_par, double[,] liste_n_x_n_par)
         {
             for (int tur_numarası = 0; tur_numarası < 10; tur_numarası++)
@@ -115,32 +116,84 @@ namespace Data_Structures_Project1
             }
         }
 
-        /* 
-         * Kendisine verilen noktalar matrisini alarak her nokta arasindaki 
-         * uzakligi bulup n*n lik uzaklik matrisini uretip bu matrisi donduren metot. 
+
+        /*
+         * Noktalar matrisini parametre olarak alan, bu noktalar arasindaki uzakligi bulup 
+         * uzaklik matrisine ekleyen ve bu uzaklik matrisini donduren metot.
          */
-        public static double[,] uzaklikMatrisi(double[,] noktalarMatrisi)
+        public static double[,] uzaklikMatrisiniBul(double[,] noktalarMatrisi)
         {
-            // Gelen matristeki toplam nokta sayisini bul.
-            private int noktaSayisi = noktalarMatrisi.Length();
+            // Toplam nokta sayisini bulalim.
+            int noktaSayisi = noktalarMatrisi.Length / 2;
 
-        // Once uzaklik matrisini uretelim.
-        private double[noktaSayisi, noktaSayisi] uzaklikMatrisi = new double[noktaSayisi, noktaSayisi];
+            // Once uzaklik matrisimizi olusturalim.
+            double[,] uzaklikMatrisi = new double[noktaSayisi, noktaSayisi];
 
+            /*
+             * Noktalar matrisindeki her bir eleman ile diger elemanlari 
+             * tek tek gezerek aralarindaki uzakligi bul.
+             */
+            for(int i = 0; i < noktaSayisi; i++)
+            {
+                // Ilk noktanin koordinatlarini al.
+                double birinciNoktaApsisi = noktalarMatrisi[i, 0];
+                double birinciNoktaOrdinati = noktalarMatrisi[i, 1];
+                for(int j = 0; j < noktaSayisi; j++)
+                {
 
+                    /*
+                     * matris[i, j] = matris[j, i] olacagindan eğer matrisin bu degerleri sifir degilse 
+                     * yani daha onceden uzakligi bulunup yazilmissa bir daha hesaplayip yazmaya gerek olmadigindan 
+                     * if ile once kontrol et. Hesaplanmamissa hesaplayip matrise ekle.
+                     */
+                    if (uzaklikMatrisi[i, j] == 0)
+                    {
+                        // Ikinci noktanin korrdinatlarini al.
+                        double ikinciNoktaApsisi = noktalarMatrisi[j, 0];
+                        double ikinciNoktaOrdinati = noktalarMatrisi[j, 1];
 
+                        // Iki nokta arasindaki uzakligi hesapla.
+                        double apsislerArasiUzaklik = birinciNoktaApsisi - ikinciNoktaApsisi;
+                        double ordinatlarArasiUzaklik = birinciNoktaOrdinati - ikinciNoktaOrdinati;
+
+                        double ikiNoktaUzakligi = Math.Sqrt(Math.Pow(apsislerArasiUzaklik, 2)
+                            + Math.Pow(ordinatlarArasiUzaklik, 2));
+
+                        // Bulunan bu uzakligi matrise, simetrik olarak her iki deger icin de ekle.
+                        uzaklikMatrisi[i, j] = ikiNoktaUzakligi;
+                        uzaklikMatrisi[j, i] = ikiNoktaUzakligi;
+                    }
+                    
+                }
+            }
+            return uzaklikMatrisi;
+        }
+
+        static void Main(string[] args)
+        {
+            double[,] listem = rastgele_nokta(20, 100, 100);
+            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(listem);
+
+            // Kaan kanka bak mesela 20*20 lik matrisin uzunlugunu 400 olarak hesapliyor.
+            Console.WriteLine(uzaklikMatrisim.Length);
+
+            // Uzaklik Listesini yazdir.
+            for(int i = 0; i < Math.Sqrt(uzaklikMatrisim.Length); i++)
+            {
+                for(int j = 0; j < listem.Length / 2; j++)
+                {
+                    Console.Write(uzaklikMatrisim[i, j]);
+                    Console.Write("---");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
 
     }
-
-    public static void Main(string[] args)
-    {
-
-        double[,] listem = rastgele_nokta(20, 100, 100);
-
-
-        Console.ReadLine();
-
-
-    }
-    
 }
+
+    
+    

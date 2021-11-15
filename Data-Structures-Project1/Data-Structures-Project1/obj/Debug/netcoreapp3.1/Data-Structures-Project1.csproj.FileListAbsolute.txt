@@ -1,0 +1,14 @@
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.exe
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.deps.json
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.runtimeconfig.json
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.runtimeconfig.dev.json
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.dll
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\bin\Debug\netcoreapp3.1\Data-Structures-Project1.pdb
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.csproj.AssemblyReference.cache
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.AssemblyInfoInputs.cache
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.AssemblyInfo.cs
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.csproj.CoreCompileInputs.cache
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.dll
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.pdb
+D:\Projeler\C# Projeleri\Data-Structures-Project1\Data-Structures-Project1\Data-Structures-Project1\obj\Debug\netcoreapp3.1\Data-Structures-Project1.genruntimeconfig.cache
