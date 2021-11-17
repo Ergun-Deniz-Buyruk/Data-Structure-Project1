@@ -29,7 +29,7 @@ public class Neuron
 		return dogrulukDegeri;
     }
 
-	public double toplamaIslemi()
+	private double toplamaIslemi()
     {
 		double sonuc = 0;
 		for(int i = 0; i < girdiArray.Length - 1; i++)
@@ -39,7 +39,7 @@ public class Neuron
 		return sonuc;
     }
 
-	public int esikDegeriBul()
+	private  int esikDegeriBul()
     {
 		if(toplamaIslemi() >= 0.5)
         {

@@ -169,30 +169,25 @@ namespace Data_Structures_Project1
 
         static void Main(string[] args)
         {
-            double[] veri1 = { 6, 5, 1 };
-            double[] veri2 = { 2, 4, 1 };
-            double[] veri3 = { -3, -5, -1 };
-            double[] veri4 = { 1, 1, 1 };
-            double[] veri5 = { -1, -1, -1 };
-            double[] veri6 = { -2, 7, 1 };
-            double[] veri7 = { -4, -2, -1 };
-            double[] veri8 = { -6, 3, -1 };
+            double[] veri1 = { 0.6, 0.5, 1 };
+            double[] veri2 = { 0.2, 0.4, 1 };
+            double[] veri3 = { -0.3, -0.5, -1 };
+            double[] veri4 = { -0.1, -0.1, -1 };
+            double[] veri5 = { 0.1, 0.1, 1 };
+            double[] veri6 = { -0.2, 0.7, 1 };
+            double[] veri7 = { -0.4, -0.2, -1 };
+            double[] veri8 = { -0.6, 0.3, -1 };
 
             Neuron neuron = new Neuron();
             neuron.setGirdiArray(veri5);
 
-            for(int i = 0; i < 10000; i++)
+            for(int i = 0; i < 100; i++)
             {
                 neuron.egit();
-                if(i == 9)
-                {
-                    Console.WriteLine("Sonuc: " + neuron.getDogrulukDegeri() / 10);
-                }
-
+                Console.WriteLine("sonuc: %" + neuron.getDogrulukDegeri());
             }
-            Console.WriteLine("Sonuc: " + neuron.getDogrulukDegeri() / 10000);
-            Console.ReadLine();
 
+            Console.ReadLine();
         }
     }
 }
