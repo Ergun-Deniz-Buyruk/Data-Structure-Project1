@@ -70,8 +70,6 @@ namespace Data_Structures_Project1
                         min_uzaklık = liste_n_x_n_par[başlangıç_noktası, y];
                         bir_sonraki_nokta = y;
                     }
-
-
                 }
                 yol_uzunluğu += min_uzaklık;
 
@@ -171,25 +169,32 @@ namespace Data_Structures_Project1
 
         static void Main(string[] args)
         {
-            double[,] listem = rastgele_nokta(20, 100, 100);
-            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(listem);
+            double[] veri1 = { 6, 5, 1 };
+            double[] veri2 = { 2, 4, 1 };
+            double[] veri3 = { -3, -5, -1 };
+            double[] veri4 = { 1, 1, 1 };
+            double[] veri5 = { -1, -1, -1 };
+            double[] veri6 = { -2, 7, 1 };
+            double[] veri7 = { -4, -2, -1 };
+            double[] veri8 = { -6, 3, -1 };
 
-            // Kaan kanka bak mesela 20*20 lik matrisin uzunlugunu 400 olarak hesapliyor.
-            Console.WriteLine(uzaklikMatrisim.Length);
+            Neuron neuron = new Neuron();
+            neuron.setGirdiArray(veri5);
 
-            // Uzaklik Listesini yazdir.
-            for(int i = 0; i < Math.Sqrt(uzaklikMatrisim.Length); i++)
+            for(int i = 0; i < 10000; i++)
             {
-                for(int j = 0; j < listem.Length / 2; j++)
+                neuron.egit();
+                if(i == 9)
                 {
-                    Console.Write(uzaklikMatrisim[i, j]);
-                    Console.Write("---");
+                    int dogrulukDegeriiii = neuron.dogrulukDegeri;
+                    Console.WriteLine("Sonuc: " + dogrulukDegeriiii/(double)10);
                 }
 
-                Console.WriteLine();
-                Console.WriteLine();
             }
+            int dogrulukDegeriii = neuron.dogrulukDegeri;
+            Console.WriteLine("Sonuc: " + dogrulukDegeriii / (double)10000);
             Console.ReadLine();
+
         }
 
     }
