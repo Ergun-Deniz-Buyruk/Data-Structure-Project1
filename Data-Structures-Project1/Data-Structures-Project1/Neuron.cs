@@ -3,9 +3,11 @@
 public class Neuron
 {
 	public static double LAMBDA = 0.05;
+
 	private double[] girdiArray;
 	private double[] agirlikArray;
-	public int dogrulukDegeri;
+
+	private int dogrulukDegeri;
 	Random rastgele = new Random();
 
 	public Neuron()
@@ -51,23 +53,24 @@ public class Neuron
     {
 		int output = esikDegeriBul();
 		int target =(int) girdiArray[girdiArray.Length - 1];
-		double katsayi = LAMBDA * (target - output);
+		double ogrenmeKatsayisi = LAMBDA * (target - output);
 
 		if(output == -1 && target == 1)
         {
 			for (int i = 0; i < 2; i++)
 			{
-				agirlikArray[i]+= agirlikArray[i] * katsayi;
+				agirlikArray[i] += agirlikArray[i] * ogrenmeKatsayisi;
 
 			}
-		}
+		} 
 		else if (output == 1 && target == -1)
-        {
+		{
 			for (int i = 0; i < 2; i++)
 			{
-				agirlikArray[i] -= agirlikArray[i] * katsayi;
+				agirlikArray[i] -= agirlikArray[i] * ogrenmeKatsayisi;
 			}
-		} else if (output == -1 && target == -1 || output == 1 && target == 1)
+		}
+		else
         {
 			dogrulukDegeri++;
         }

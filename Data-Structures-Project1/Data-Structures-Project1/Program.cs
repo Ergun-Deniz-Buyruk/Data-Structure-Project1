@@ -186,17 +186,14 @@ namespace Data_Structures_Project1
                 neuron.egit();
                 if(i == 9)
                 {
-                    int dogrulukDegeriiii = neuron.dogrulukDegeri;
-                    Console.WriteLine("Sonuc: " + dogrulukDegeriiii/(double)10);
+                    Console.WriteLine("Sonuc: " + neuron.getDogrulukDegeri() / 10);
                 }
 
             }
-            int dogrulukDegeriii = neuron.dogrulukDegeri;
-            Console.WriteLine("Sonuc: " + dogrulukDegeriii / (double)10000);
+            Console.WriteLine("Sonuc: " + neuron.getDogrulukDegeri() / 10000);
             Console.ReadLine();
 
         }
-
     }
 }
 
