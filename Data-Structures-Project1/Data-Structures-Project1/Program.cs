@@ -184,7 +184,7 @@ namespace Data_Structures_Project1
             for(int i = 0; i < 100; i++)
             {
                 neuron.egit();
-                Console.WriteLine("sonuc: %" + neuron.getDogrulukDegeri());
+                Console.WriteLine("sonuc: %" + neuron.getDogrulukDegeri() /(double) i * 100);
             }
 
             Console.ReadLine();
