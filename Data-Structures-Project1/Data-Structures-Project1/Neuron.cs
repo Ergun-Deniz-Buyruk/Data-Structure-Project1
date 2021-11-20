@@ -2,7 +2,7 @@
 
 public class Neuron
 {
-	public static double LAMBDA = 0.05;
+	public const double LAMBDA = 0.05;
 
 	private double[] girdiArray;
 	private double[] agirlikArray;

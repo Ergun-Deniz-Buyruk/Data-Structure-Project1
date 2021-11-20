@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "XIlaoJThax/zOXVNRynFcTt/9R50BxfMjUmqrhfe3+KhntQjgGZuSeEEDbDqstoDvrbpyiaGilPYWqr6Mqig3A==",
+  "dgSpecHash": "JwqkOPO/j8ijTCAuPBuebuBqt3GzWv1QUMMYcdZx2q3yAI5LM5JBQ68i3SN/P9Rnv81lmVE/sD8uuHPZIhIq+A==",
   "success": true,
   "projectFilePath": "D:\\Projeler\\C# Projeleri\\Data-Structures-Project1\\Data-Structures-Project1\\Data-Structures-Project1\\Data-Structures-Project1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Ergun Deniz Buyruk\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512",
+    "C:\\Users\\Ergun Deniz Buyruk\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Ergun Deniz Buyruk\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Ergun Deniz Buyruk\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
   "logs": []
 }
