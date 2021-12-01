@@ -29,28 +29,19 @@ namespace Data_Structures_Project1
         }
 
 
-        public static void dolaşım(double[,] liste1_par, double[,] liste_n_x_n_par)
+        public static void dolasim(double[,] liste1_par, double[,] liste_n_x_n_par)
         {
             for (int tur_numarası = 0; tur_numarası < 10; tur_numarası++)
             {
                 ArrayList sıra_listesi = new ArrayList();
                 double yol_uzunluğu = 0;
 
-                double[,] kopya_liste = new double[liste1_par.GetLength(0), 2];
-                for (int len = 0; len < liste1_par.GetLength(0); len++)
-                {
-                    kopya_liste[len, 0] = liste1_par[len, 0];
-                    kopya_liste[len, 1] = liste1_par[len, 1];
-                }
                 int başlangıç_noktası = rastgele.Next(20);
 
                 sıra_listesi.Add(başlangıç_noktası);
-                int bir_sonraki_nokta = 50;
-
-
-
 
                 double min_uzaklık;
+
                 if (başlangıç_noktası != 0)
                 {
                     min_uzaklık = liste_n_x_n_par[başlangıç_noktası, başlangıç_noktası - 1];
@@ -61,49 +52,32 @@ namespace Data_Structures_Project1
                     min_uzaklık = liste_n_x_n_par[başlangıç_noktası, başlangıç_noktası + 1];
 
                 }
+                int bir_sonraki_nokta = başlangıç_noktası;
 
-
-                for (int y = 0; y < 20; y++)
+                for (int d = 0; d < 18; d++)
                 {
-                    if ((liste_n_x_n_par[başlangıç_noktası, y] < min_uzaklık) && (liste_n_x_n_par[başlangıç_noktası, y] != 0))
-                    {
-                        min_uzaklık = liste_n_x_n_par[başlangıç_noktası, y];
-                        bir_sonraki_nokta = y;
-                    }
-                }
-                yol_uzunluğu += min_uzaklık;
-
-                for (int d = 0; d < 19; d++)
-                {
-                    sıra_listesi.Add(bir_sonraki_nokta);
-                    double min_uzaklık_2;
-                    if (bir_sonraki_nokta != 0)
-                    {
-                        min_uzaklık_2 = liste_n_x_n_par[bir_sonraki_nokta, bir_sonraki_nokta - 1];
-
-                    }
-                    else
-                    {
-                        min_uzaklık_2 = liste_n_x_n_par[bir_sonraki_nokta, bir_sonraki_nokta + 1];
-
-                    }
+                    int su_anki_nokta = bir_sonraki_nokta;
+                    double min_uzaklık_2 = 1.7976931348623157E+308;
+                    
                     for (int ü = 0; ü < 20; ü++)
                     {
-                        if ((liste_n_x_n_par[bir_sonraki_nokta, ü] < min_uzaklık_2) && (liste_n_x_n_par[bir_sonraki_nokta, ü] != 0) && sıra_listesi.Contains(bir_sonraki_nokta) == false)
+                        if ((liste_n_x_n_par[bir_sonraki_nokta, ü] < min_uzaklık_2)
+                            && sıra_listesi.Contains(ü) == false)
                         {
-                            min_uzaklık_2 = liste_n_x_n_par[başlangıç_noktası, ü];
+                            min_uzaklık_2 = liste_n_x_n_par[bir_sonraki_nokta, ü];
                             bir_sonraki_nokta = ü;
                         }
 
-
                     }
+                    Console.WriteLine(min_uzaklık_2);
+
                     yol_uzunluğu += min_uzaklık_2;
 
                 }
 
-                Console.WriteLine("tur numarası: " + tur_numarası);
+                Console.WriteLine("tur numarası: " + (tur_numarası + 1));
                 Console.WriteLine("uzunluk: " + yol_uzunluğu);
-                for (int n = 0; n < 20; n++)
+                for (int n = 0; n < 19; n++)
                 {
                     Console.Write(sıra_listesi[n] + "  ");
 
@@ -169,6 +143,7 @@ namespace Data_Structures_Project1
 
         static void Main(string[] args)
         {
+            
             double[] veri1 = { 0.6, 0.5, 1 };
             double[] veri2 = { 0.2, 0.4, 1 };
             double[] veri3 = { -0.3, -0.5, -1 };
@@ -179,16 +154,53 @@ namespace Data_Structures_Project1
             double[] veri8 = { -0.6, 0.3, -1 };
 
             Neuron neuron = new Neuron();
-            neuron.setGirdiArray(veri5);
 
-            for(int i = 0; i < 100; i++)
+            for(int i = 0; i < 10000000; i++)
             {
-                neuron.egit();
-                Console.WriteLine("sonuc: %" + neuron.getDogrulukDegeri() /(double) i * 100);
+                neuron.sifirla();
+
+                neuron.egit(veri1);
+                neuron.egit(veri2);
+                neuron.egit(veri3);
+                neuron.egit(veri4);
+                neuron.egit(veri5);
+                neuron.egit(veri6);
+                neuron.egit(veri7);
+                neuron.egit(veri8);
+
+                Console.WriteLine(neuron.dogrulukDegeri + " / " + neuron.egitimDegeri);
+                Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
+                Console.WriteLine();
+                /*if (i == 9)
+                {
+                    Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
+                }*/
+                
             }
 
+
+            /*
+            double[,] listem = rastgele_nokta(20, 100, 100);
+            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(listem);
+
+            Console.WriteLine(uzaklikMatrisim.Length);
+
+            for (int i = 0; i < Math.Sqrt(uzaklikMatrisim.Length); i++)
+            {
+                for (int j = 0; j < listem.Length / 2; j++)
+                {
+                    Console.Write(String.Format("{0:F3}", uzaklikMatrisim[i, j]) + "  ");
+                }
+
+                Console.WriteLine();
+            }
+
+            dolasim(listem, uzaklikMatrisim);
+            */
             Console.ReadLine();
+            
         }
+        
     }
 }
 

@@ -2,12 +2,11 @@
 
 public class Neuron
 {
-	public const double LAMBDA = 0.05;
+	public const double LAMBDA = 0.15;
 
-	private double[] girdiArray;
 	private double[] agirlikArray;
-
-	private int dogrulukDegeri;
+	public int dogrulukDegeri;
+	public int egitimDegeri;
 	Random rastgele = new Random();
 
 	public Neuron()
@@ -17,19 +16,21 @@ public class Neuron
 		{
 			agirlikArray[i] = 2 * rastgele.NextDouble() - 1;
 		}
-		dogrulukDegeri = 0;
-	}
-	public void setGirdiArray(double[] girdiArray)
-    {
-		this.girdiArray = girdiArray;
+		sifirla();
 	}
 
-	public int getDogrulukDegeri()
+	public double getDogrulukYuzdesi()
     {
-		return dogrulukDegeri;
+		return dogrulukDegeri / (double)egitimDegeri * 100;
     }
 
-	private double toplamaIslemi()
+	public void sifirla()
+    {
+		dogrulukDegeri = 0;
+		egitimDegeri = 0;
+    }
+
+	private double toplamaIslemi(double[] girdiArray)
     {
 		double sonuc = 0;
 		for(int i = 0; i < girdiArray.Length - 1; i++)
@@ -39,9 +40,9 @@ public class Neuron
 		return sonuc;
     }
 
-	private  int esikDegeriBul()
+	private  int esikDegeriBul(double[] girdiArray)
     {
-		if(toplamaIslemi() >= 0.5)
+		if(toplamaIslemi(girdiArray) >= 0.5)
         {
 			return 1;
         } else
@@ -49,9 +50,10 @@ public class Neuron
 			return -1;
         }
     }
-	public void egit()
+	public void egit(double[] girdiArray)
     {
-		int output = esikDegeriBul();
+		egitimDegeri++;
+		int output = esikDegeriBul(girdiArray);
 		int target =(int) girdiArray[girdiArray.Length - 1];
 		double ogrenmeKatsayisi = LAMBDA * (target - output);
 
