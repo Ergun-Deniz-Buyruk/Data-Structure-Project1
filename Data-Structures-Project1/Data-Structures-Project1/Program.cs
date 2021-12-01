@@ -1,16 +1,10 @@
 ﻿using System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
 
 namespace Data_Structures_Project1
 {
     class Program
     {
-
         static Random rastgele = new Random();
         public static double[,] rastgele_nokta(int n_par, int genişlik_par, int yükseklik_par)
         {
@@ -112,7 +106,6 @@ namespace Data_Structures_Project1
                 double birinciNoktaOrdinati = noktalarMatrisi[i, 1];
                 for(int j = 0; j < noktaSayisi; j++)
                 {
-
                     /*
                      * matris[i, j] = matris[j, i] olacagindan eğer matrisin bu degerleri sifir degilse 
                      * yani daha onceden uzakligi bulunup yazilmissa bir daha hesaplayip yazmaya gerek olmadigindan 
@@ -143,7 +136,7 @@ namespace Data_Structures_Project1
 
         static void Main(string[] args)
         {
-            
+            // Veri setlerimizi tanimlayalim.
             double[] veri1 = { 0.6, 0.5, 1 };
             double[] veri2 = { 0.2, 0.4, 1 };
             double[] veri3 = { -0.3, -0.5, -1 };
@@ -153,9 +146,15 @@ namespace Data_Structures_Project1
             double[] veri7 = { -0.4, -0.2, -1 };
             double[] veri8 = { -0.6, 0.3, -1 };
 
+            // Neuronumuzu yaratalim.
             Neuron neuron = new Neuron();
 
-            for(int i = 0; i < 10000000; i++)
+            /*
+             * 100 kere epok islemini uygulayalim.
+             * Her turda tum veri setlerini birer kere alarak kendini egitiyor.
+             * 
+             */
+            for(int i = 0; i < 100; i++)
             {
                 neuron.sifirla();
 
@@ -168,16 +167,15 @@ namespace Data_Structures_Project1
                 neuron.egit(veri7);
                 neuron.egit(veri8);
 
-                Console.WriteLine(neuron.dogrulukDegeri + " / " + neuron.egitimDegeri);
-                Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
-                Console.WriteLine();
-                /*if (i == 9)
+                // 10. turda basari yuzdesini konsola yazdiralim.
+                if (i == 9)
                 {
                     Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
-                }*/
+                }
                 
             }
-
+            // 100 epok sonunda basari yuzdesini konsola yazdiralim.
+            Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
 
             /*
             double[,] listem = rastgele_nokta(20, 100, 100);
