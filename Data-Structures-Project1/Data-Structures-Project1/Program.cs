@@ -5,83 +5,69 @@ namespace Data_Structures_Project1
 {
     class Program
     {
+        public const int EN_KISA_YOL_SAYISI = 10;
+
         static Random rastgele = new Random();
-        public static double[,] rastgele_nokta(int n_par, int genişlik_par, int yükseklik_par)
+
+        public static double[,] rastgeleNoktaBul(int noktaSayisi, int genislik, int yukseklik)//rastgele nokta üreten metot
         {
-            double[,] a = new double[n_par, 2];
-            for (int i = 0; i < n_par; i++)
+            double[,] noktalarListesi = new double[noktaSayisi, 2];//nx2 lik bir matris
+            
+            for (int i = 0; i < noktaSayisi; i++)
             {
-                double genişlik = rastgele.NextDouble() * 100;
-                double yükseklik = rastgele.NextDouble() * 100;
+                double xKoordinati = rastgele.NextDouble() * genislik;      //nextdouble metodu 0 ile 1 arasında değer ürettiği için genislik ile çarpıyorum
+                double yKoordinati = rastgele.NextDouble() * yukseklik; //nextdouble metodu 0 ile 1 arasında değer ürettiği için yukseklik ile çarpıyorum
 
-                //
-
-                a[i, 0] = genişlik;
-                a[i, 1] = yükseklik;
+                noktalarListesi[i, 0] = xKoordinati; //değerleri matrise atıyorum
+                noktalarListesi[i, 1] = yKoordinati;
             }
-            return a;
+            return noktalarListesi; //matrisi döndürüyorum
         }
 
-
-        public static void dolasim(double[,] liste1_par, double[,] liste_n_x_n_par)
+        //en kısa yolu bulan metot
+        public static void dolasim(double[,] noktalarListesi, double[,] uzaklikMatrisi)
         {
-            for (int tur_numarası = 0; tur_numarası < 10; tur_numarası++)
+            ArrayList siraListesi = new ArrayList(); // Sira listesini tutan Arraylist
+            
+            double toplamYolUzunlugu = 0; // Toplam yol uzunlugu                            
+
+            int baslangicNoktasi = rastgele.Next(noktalarListesi.GetLength(0)); // Baslangic noktasini random atadim.
+
+            siraListesi.Add(baslangicNoktasi); // Baslangic listesini sira listesine ekle.             
+
+            int suAnkiNokta = baslangicNoktasi; // Su an uzerinde bulundugumuz noktaya ilk noktayı atadık.
+
+            double minUzaklik; // Minumum uzakligi tanimladim.
+            // Su anki noktaya en yakin noktamiz bir sonraki noktamiz olacak. bunu ilk basta su anki nokta diyelim.
+            int birSonrakiNokta = suAnkiNokta; // to make compiler happy
+
+            // Listedeki tum elemanlari gezerek su anki noktaya en yakin noktayi bulalim.
+            for (int i = 0; i < noktalarListesi.GetLength(0) - 1; i++) 
             {
-                ArrayList sıra_listesi = new ArrayList();
-                double yol_uzunluğu = 0;
+                minUzaklik = 1.7976931348623157E+308;// Min uzakliga verilebilecek en buyuk  noktayi verelim.
 
-                int başlangıç_noktası = rastgele.Next(20);
-
-                sıra_listesi.Add(başlangıç_noktası);
-
-                double min_uzaklık;
-
-                if (başlangıç_noktası != 0)
+                for (int j = 0; j < noktalarListesi.GetLength(0); j++) // her bir noktayı tek tek gezerek en yakını bul.
                 {
-                    min_uzaklık = liste_n_x_n_par[başlangıç_noktası, başlangıç_noktası - 1];
-
-                }
-                else
-                {
-                    min_uzaklık = liste_n_x_n_par[başlangıç_noktası, başlangıç_noktası + 1];
-
-                }
-                int bir_sonraki_nokta = başlangıç_noktası;
-
-                for (int d = 0; d < 18; d++)
-                {
-                    int su_anki_nokta = bir_sonraki_nokta;
-                    double min_uzaklık_2 = 1.7976931348623157E+308;
-                    
-                    for (int ü = 0; ü < 20; ü++)
+                    // Eger noktamizin uzakligi en kücükse ve daha önce bu noktaya gidilmemisse bir sonraki noktamizi bulduk demektir.
+                    if ((uzaklikMatrisi[suAnkiNokta, j] < minUzaklik) && (siraListesi.Contains(j) == false))
                     {
-                        if ((liste_n_x_n_par[bir_sonraki_nokta, ü] < min_uzaklık_2)
-                            && sıra_listesi.Contains(ü) == false)
-                        {
-                            min_uzaklık_2 = liste_n_x_n_par[bir_sonraki_nokta, ü];
-                            bir_sonraki_nokta = ü;
-                        }
-
+                        minUzaklik = uzaklikMatrisi[suAnkiNokta, j]; // min uzaklik degerini al.
+                        birSonrakiNokta = j;// Bir sonraki noktamizi degistir.
                     }
-                    Console.WriteLine(min_uzaklık_2);
-
-                    yol_uzunluğu += min_uzaklık_2;
-
                 }
+                toplamYolUzunlugu += minUzaklik; // Toplam uzakligi bulmak icin su anki uzakligi ekle.
+                siraListesi.Add(birSonrakiNokta);// Buldugumuz noktayi sira listesine ekle.
+                suAnkiNokta = birSonrakiNokta;// Noktamizi buldugumuza göre artık bir sonraki noktaya gecebiliriz. Bunun icin su anki noktamizi bir sonraki noktamiz yapalim.
+            } // End For
 
-                Console.WriteLine("tur numarası: " + (tur_numarası + 1));
-                Console.WriteLine("uzunluk: " + yol_uzunluğu);
-                for (int n = 0; n < 19; n++)
-                {
-                    Console.Write(sıra_listesi[n] + "  ");
-
-                }
-
-                //matrisi yazdır
-
+            // Tum noktalar da bulunduguna gore sira listemizi konsola yazdıralım.
+            Console.WriteLine("Yol Uzunluğu: " + toplamYolUzunlugu);        
+            foreach (int nokta in siraListesi)
+            {
+                Console.Write($"{nokta}-");           
             }
+            Console.WriteLine();
         }
-
 
         /*
          * Noktalar matrisini parametre olarak alan, bu noktalar arasindaki uzakligi bulup 
@@ -134,8 +120,80 @@ namespace Data_Structures_Project1
             return uzaklikMatrisi;
         }
 
+        // Ilk sorunun a secenegindeki test verileri
+        public static void IlkSorununASecenegi()
+        {
+            double[,] noktalarListem1 = rastgeleNoktaBul(20, 100, 100);
+            double[,] noktalarListem2 = rastgeleNoktaBul(50, 100, 100);
+
+            for (int i = 0; i < noktalarListem1.GetLength(0); i++)
+            {
+                Console.Write(noktalarListem1[i, 0] + ", " + noktalarListem1[i, 1]);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("-----------------------------------------------------");
+
+            for (int i = 0; i < noktalarListem2.GetLength(0); i++)
+            {
+                Console.Write(noktalarListem2[i, 0] + ", " + noktalarListem2[i, 1]);
+                Console.WriteLine();
+            }
+        }
+
+        // Ilk sorunun b secenegi
+        public static void IlkSorununBSecenegi()
+        {
+            double[,] noktalarListem1 = rastgeleNoktaBul(20, 100, 100);
+            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(noktalarListem1);
+
+            Console.WriteLine();
+            Console.WriteLine("{0,90}", "Uzaklık Matrisi (DM)");
+            Console.WriteLine();
+            for (int i = 0; i < uzaklikMatrisim.GetLength(0); i++)
+            {
+                if (i == 0)
+                {
+                    Console.Write("    ");
+                    for (int k = 0; k < uzaklikMatrisim.GetLength(0); k++)
+                    {
+                        Console.Write("{0,-8}", k);
+                    }
+                    Console.WriteLine();
+                }
+                Console.Write("{0, -4}", i);
+                for (int j = 0; j < uzaklikMatrisim.GetLength(0); j++)
+                {
+                    Console.Write("{0,-8:N2}", uzaklikMatrisim[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+        
+        // Ilk sorunun c secenegi
+        public static void IlkSorununCSecenegi()
+        {
+            double[,] noktalarListem1 = rastgeleNoktaBul(20, 100, 100);
+            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(noktalarListem1);
+
+            for (int i = 0; i < EN_KISA_YOL_SAYISI; i++)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Uğradığı Noktalar: " + (i + 1));
+                dolasim(noktalarListem1, uzaklikMatrisim);
+            }
+            Console.WriteLine();
+        }
+
         static void Main(string[] args)
         {
+
+            IlkSorununASecenegi();
+            IlkSorununBSecenegi();
+            IlkSorununCSecenegi();
+
+            // 2. Soru
+
             // Veri setlerimizi tanimlayalim.
             double[] veri1 = { 0.6, 0.5, 1 };
             double[] veri2 = { 0.2, 0.4, 1 };
@@ -149,12 +207,9 @@ namespace Data_Structures_Project1
             // Neuronumuzu yaratalim.
             Neuron neuron = new Neuron();
 
-            /*
-             * 100 kere epok islemini uygulayalim.
-             * Her turda tum veri setlerini birer kere alarak kendini egitiyor.
-             * 
-             */
-            for(int i = 0; i < 100; i++)
+            
+            // 100 kere epok islemini uygulayalim. Her turda tum veri setlerini birer kere alarak kendini egitiyor.
+            for (int i = 0; i < 100; i++)
             {
                 neuron.sifirla();
 
@@ -170,37 +225,29 @@ namespace Data_Structures_Project1
                 // 10. turda basari yuzdesini konsola yazdiralim.
                 if (i == 9)
                 {
-                    Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
+                    Console.WriteLine("10 epok sonundaki doğruluk değeri: %" + neuron.getDogrulukYuzdesi());
                 }
-                
+
             }
             // 100 epok sonunda basari yuzdesini konsola yazdiralim.
-            Console.WriteLine("sonuc: %" + neuron.getDogrulukYuzdesi());
+            Console.WriteLine("100 epok sonundaki doğruluk değeri: %" + neuron.getDogrulukYuzdesi());
 
-            /*
-            double[,] listem = rastgele_nokta(20, 100, 100);
-            double[,] uzaklikMatrisim = uzaklikMatrisiniBul(listem);
+            // Test verileri:
+            double[] testVeri1 = { 0.7, 0.3, 1 };
+            double[] testVeri2 = { 0.4, -0.9, -1 };
+            double[] testVeri3 = { -0.3, 0.5, 1 };
+            double[] testVeri4 = { -0.6, -0.1, -1 };
+            double[] testVeri5 = { 0.8, -0.1, 1 };
 
-            Console.WriteLine(uzaklikMatrisim.Length);
+            neuron.egit(testVeri1);
+            neuron.egit(testVeri2);
+            neuron.egit(testVeri3);
+            neuron.egit(testVeri4);
+            neuron.egit(testVeri5);
 
-            for (int i = 0; i < Math.Sqrt(uzaklikMatrisim.Length); i++)
-            {
-                for (int j = 0; j < listem.Length / 2; j++)
-                {
-                    Console.Write(String.Format("{0:F3}", uzaklikMatrisim[i, j]) + "  ");
-                }
+            Console.WriteLine("5 Test verisinin doğruluk değeri: %" + neuron.getDogrulukYuzdesi());
 
-                Console.WriteLine();
-            }
-
-            dolasim(listem, uzaklikMatrisim);
-            */
-            Console.ReadLine();
-            
         }
-        
+
     }
 }
-
-    
-    
