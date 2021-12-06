@@ -61,7 +61,8 @@ namespace Data_Structures_Project1
             } // End For
 
             // Tum noktalar da bulunduguna gore sira listemizi konsola yazdıralım.
-            Console.WriteLine("Yol Uzunluğu: " + toplamYolUzunlugu);        
+            Console.WriteLine("Yol Uzunluğu: " + toplamYolUzunlugu);
+            Console.Write("Uğradığı Noktalar: ");
             foreach (int nokta in siraListesi)
             {
                 Console.Write($"{nokta}-");           
@@ -76,7 +77,7 @@ namespace Data_Structures_Project1
         public static double[,] uzaklikMatrisiniBul(double[,] noktalarMatrisi)
         {
             // Toplam nokta sayisini bulalim.
-            int noktaSayisi = noktalarMatrisi.Length / 2;
+            int noktaSayisi = noktalarMatrisi.GetLength(0);
 
             // Once uzaklik matrisimizi olusturalim.
             double[,] uzaklikMatrisi = new double[noktaSayisi, noktaSayisi];
@@ -179,7 +180,7 @@ namespace Data_Structures_Project1
             for (int i = 0; i < EN_KISA_YOL_SAYISI; i++)
             {
                 Console.WriteLine();
-                Console.WriteLine("Uğradığı Noktalar: " + (i + 1));
+                Console.WriteLine("Tur Numarası: " + (i + 1));
                 dolasim(noktalarListem1, uzaklikMatrisim);
             }
             Console.WriteLine();
@@ -233,12 +234,13 @@ namespace Data_Structures_Project1
             Console.WriteLine("100 epok sonundaki doğruluk değeri: %" + neuron.getDogrulukYuzdesi());
 
             // Test verileri:
-            double[] testVeri1 = { 0.7, 0.3, 1 };
+            double[] testVeri1 = { 0.7, 0.4, 1 };
             double[] testVeri2 = { 0.4, -0.9, -1 };
             double[] testVeri3 = { -0.3, 0.5, 1 };
-            double[] testVeri4 = { -0.6, -0.1, -1 };
+            double[] testVeri4 = { -0.6, -0.8, -1 };
             double[] testVeri5 = { 0.8, -0.1, 1 };
 
+            neuron.sifirla();
             neuron.egit(testVeri1);
             neuron.egit(testVeri2);
             neuron.egit(testVeri3);
@@ -246,7 +248,6 @@ namespace Data_Structures_Project1
             neuron.egit(testVeri5);
 
             Console.WriteLine("5 Test verisinin doğruluk değeri: %" + neuron.getDogrulukYuzdesi());
-
         }
 
     }
